@@ -1,5 +1,5 @@
 {
-  "name": "Python Project",
+  "name": "Python Project: LLPS",
   "image": "mcr.microsoft.com/vscode/devcontainers/python:3.8",
   "settings": { 
     "python.pythonPath": "/usr/local/bin/python"
