@@ -1,12 +1,22 @@
 {
-  "name": "Python Project: LLPS",
-  "image": "mcr.microsoft.com/vscode/devcontainers/python:3.8",
-  "settings": { 
-    "python.pythonPath": "/usr/local/bin/python"
+  "name": "Python Development",
+  "image": "python:3.9-slim",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "python.pythonPath": "/usr/local/bin/python",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
+    "python.formatting.blackPath": "/usr/local/bin/black",
+    "python.formatting.provider": "black"
   },
   "extensions": [
-    "ms-python.python"
+    "ms-python.python",
+    "ms-python.vscode-pylint",
+    "ms-python.black-formatter"
   ],
-  "postCreateCommand": "pip install -r requirements.txt",
-  "workspaceFolder": "/workspace"
+  "forwardPorts": [],
+  "postCreateCommand": "pip install --no-cache-dir -r requirements.txt",
+  "workspaceFolder": "/workspaces/LLPS-ProteinRNA_Condensates-CP2P2024",
+  "remoteUser": "root"
 }
