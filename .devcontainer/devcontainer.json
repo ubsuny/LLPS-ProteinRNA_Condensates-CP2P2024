@@ -1,6 +1,6 @@
 {
   "name": "Python Development",
-  "image": "python:3.9-slim",
+  "image": "python:3.9",
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash",
     "python.pythonPath": "/usr/local/bin/python",
