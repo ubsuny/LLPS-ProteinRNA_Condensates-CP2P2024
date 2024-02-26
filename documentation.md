@@ -36,8 +36,7 @@ A single row of data is represented as a tuple of floats, encapsulating the stru
 #### Python Annotation
 
 ```python
-from typing import list
+from typing import List  # Correct import but unnecessary for this example being built-in for Python 3.9 or later.
 
 # Define a type alias for a data point
 DataPoint = list[float]
-
