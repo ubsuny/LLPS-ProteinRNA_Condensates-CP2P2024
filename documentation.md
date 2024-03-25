@@ -91,3 +91,43 @@ plt.savefig('Gaussian.png', dpi=300)
 ![Gaussian Distribution Enhanced](https://github.com/ubsuny/LLPS-ProteinRNA_Condensates-CP2P2024/assets/143649367/b6e0e455-edf9-4e51-ae1d-92eb2a5a85ee)
 
 *Figure 1 - Gaussian distribution of displacements for a random walk.*
+
+# Viscosity Measurement in Protein-DNA Condensates Using Video Particle Tracking (VPT)
+
+## Introduction to the Physics of the Project
+
+The phenomenon of Liquid-Liquid Phase Separation (LLPS) is a critical biophysical process that underlies the formation of biomolecular condensates within cells. These condensates are essential for various cellular functions, including gene expression regulation, signal transduction, and stress response. LLPS involves the demixing of a homogenous solution into two distinct phases: a dense phase (condensate) and a dilute phase. This process is driven by multivalent interactions among biomolecules, such as proteins and nucleic acids, leading to the spontaneous organization of intracellular matter.
+
+Understanding the material properties, such as viscosity, of these condensates is crucial for elucidating their functional roles within the cellular environment. Viscosity, a measure of a fluid's resistance to flow, influences the rate of molecular exchange within and between the condensates and the surrounding medium. Therefore, accurately quantifying the viscosity of protein-DNA condensates is fundamental to comprehending their dynamics and functions.
+
+## Literature Review
+
+### Background
+
+The article "Quantifying viscosity and surface tension of multicomponent protein-nucleic acid condensates" by Ibraheem Alshareedah, George M. Thurston, and Priya R. Banerjee presents an experimental framework to quantify the physical properties of biomolecular condensates. Our project aims to reproduce a part of their study focusing on measuring the viscosity of protein-DNA condensates using the Video Particle Tracking (VPT) method.
+
+### Objective
+
+The primary objective of this project is to employ VPT to estimate the viscosity of protein-DNA condensates formed through LLPS. This method involves tracking the motion of tracer particles embedded within the condensates and analyzing their movement to derive viscosity values.
+
+### Methodology
+
+1. **Sample Preparation**: Create protein-DNA condensates in vitro using a model system, such as the positively charged low-complexity disordered polypeptide $[RGRGG]_5$ and a negatively charged single-stranded DNA (ssDNA: dT40). Mix these components in a buffer solution at varying stoichiometries to induce phase separation.
+
+2. **Embedding Tracer Particles**: Introduce fluorescently labeled polystyrene beads of a known size (e.g., 200 nm) into the mixture as tracer particles before the onset of phase separation.
+
+3. **Video Particle Tracking**: Utilize a fluorescence microscope equipped with a high-speed camera to capture real-time videos of the tracer particles moving within the condensates. Ensure to record multiple videos covering different regions of the sample to gather a statistically significant dataset.
+
+4. **Data Analysis**:
+   - Extract the trajectories of individual tracer particles from the videos using image analysis software.
+   - Calculate the Mean Squared Displacement (MSD) of the tracer particles over time.
+   - Apply the Stokes-Einstein relation to derive the viscosity of the condensates from the MSD data.
+
+### Expected Outcomes
+
+- The viscosity measurements should yield results consistent with those reported in the literature, within the experimental error margins.
+- The viscosity values are anticipated to provide insights into the internal dynamics of the protein-DNA condensates and how they are influenced by factors such as mixture stoichiometry.
+
+### Conclusion
+
+By focusing on the VPT method to estimate the viscosity of protein-DNA condensates, this project aims to contribute to the broader understanding of the material properties of biomolecular condensates. The findings will have implications for unraveling the roles of these condensates in cellular organization and function, as well as their involvement in disease pathologies related to aberrant phase separation processes.
