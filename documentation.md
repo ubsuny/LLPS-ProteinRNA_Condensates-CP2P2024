@@ -131,3 +131,62 @@ The primary objective of this project is to employ VPT to estimate the viscosity
 ### Conclusion
 
 By focusing on the VPT method to estimate the viscosity of protein-DNA condensates, this project aims to contribute to the broader understanding of the material properties of biomolecular condensates. The findings will have implications for unraveling the roles of these condensates in cellular organization and function, as well as their involvement in disease pathologies related to aberrant phase separation processes.
+
+# TensorFlow in MSD Calculation
+
+TensorFlow is engineered for high-performance numerical computing, adept at managing multidimensional arrays and complex operations, which makes it invaluable for large-scale machine learning tasks. In our MSD calculation code, we utilized TensorFlow to orchestrate these computations within a graph-based architecture, an environment where operations are nodes and data are edges, expecting to leverage its potential for rapid, parallel processing: TensorFlow has ability to do many tasks at once to make our calculations fast.  However, in this scenario, the computational load did not necessitate such an elaborate setup. The overhead of initializing TensorFlow's environment overshadowed its benefits, as the task's simplicity didn't harness the full scope of TensorFlow's capabilities. Contrarily, NumPy, with its straightforward array operations and CPU-optimized performance, emerged as the more efficient tool for this specific MSD computation, delivering fast and precise results without the complexity of TensorFlow's computational graph. Moreover, we compared the performance and applicability of two prominent Python libraries, NumPy and TensorFlow, for computing MSD. Below is the code for Tensorflow:
+```python
+import tensorflow as tf
+# Convert xpos and ypos to TensorFlow tensors
+xpos_tf = tf.constant(xpos, dtype=tf.float32)
+ypos_tf = tf.constant(ypos, dtype=tf.float32)
+
+# Function to calculate MSD using TensorFlow
+def calculate_msd_tensorflow(xpos, ypos, frametime, minframe):
+    nData = tf.size(xpos)
+    numberOfdeltaT = tf.cast(nData / 2, tf.int32)
+    msd = tf.TensorArray(dtype=tf.float32, size=numberOfdeltaT, dynamic_size=False)
+
+    # Function to compute the squared displacement
+    def compute_displacement(delta_t, msd):
+        deltax = xpos[1 + delta_t:nData - 1] - xpos[1:nData - 1 - delta_t]
+        deltay = ypos[1 + delta_t:nData - 1] - ypos[1:nData - 1 - delta_t]
+        squared_displacement = tf.square(deltax) + tf.square(deltay)
+        mean_squared_displacement = tf.reduce_mean(squared_displacement)
+        msd = msd.write(delta_t-1, (frametime * tf.cast(delta_t, tf.float32), mean_squared_displacement))
+        return delta_t + 1, msd
+
+    _, msd_final = tf.while_loop(
+        cond=lambda delta_t, _: delta_t <= numberOfdeltaT,
+        body=compute_displacement,
+        loop_vars=(tf.constant(1), msd)
+    )
+
+    msd_result = msd_final.stack()
+    return msd_result
+
+# Call the function
+msd_tf = calculate_msd_tensorflow(xpos_tf, ypos_tf, frametime, minframe)
+msd_tf = msd_tf.numpy()  # Convert the result back to a NumPy array for further processing or analysis
+
+```
+In the `calculate_msd_tensorflow` function, we leverage several TensorFlow components: `tf.constant` is used to transform our position data into a stable form that TensorFlow can work with, forming the building blocks of the computation. `tf.TensorArray` acts as a dynamic list to store our results as we loop through calculations. The `tf.while_loop` construct efficiently repeats a block of calculations (squared displacements in our case) until a specified condition is no longer met, helping to manage memory more effectively and speed up the process on powerful hardware. `tf.square` performs an element-wise operation to square the difference between positions, which is a crucial step in MSD calculation. Finally, `tf.reduce_mean` is applied to average these squared differences, giving us the Mean Squared Displacement. These TensorFlow tools are designed to handle repetitive calculations and large arrays efficiently, potentially taking advantage of GPU or TPU acceleration to speed up the computation significantly.
+
+## MSD Plot Explanation and Execution Time Comparison
+
+![msd_plot](https://github.com/ubsuny/LLPS-ProteinRNA_Condensates-CP2P2024/assets/143649367/478e9229-fa3e-4f14-bfb2-2f50c4177513)
+
+
+The provided MSD plot presents the time-dependent trajectory of the MSD values calculated using both NumPy and TensorFlow.
+
+### Plot Analysis:
+- The blue line with circle markers represents the NumPy results, showing a consistent and expected increase in MSD over time, which is typical for diffusive processes.
+- The orange dashed line with cross markers illustrates the TensorFlow results, closely tracking the NumPy computation, suggesting numerical consistency across both methods.
+
+### Execution Time Analysis:
+- **NumPy Execution Time**: Rapid computation (`0.0113 seconds`) due to its highly optimized CPU array operations.
+- **TensorFlow Execution Time**: Slower computation (`1.8179 seconds`) due to the overhead of initializing a computational graph, which is not offset by the complexity of the task. TensorFlow's design incorporates the building of a complex graph structure to map out all the computations before any actual number crunching occurs. This characteristic, while beneficial for computationally intensive tasks that can leverage parallelism, adds an unnecessary layer of complexity for straightforward calculations like MSD, thus prolonging the computation time without yielding additional benefits.  
+
+The side-by-side MSD trajectory analysis emphasizes the critical aspect of tool selection in computational tasks. It underscores that the choice of computational framework should align with the complexity and nature of the task at hand. For calculations similar to MSD that are not inherently parallelizable or data-intensive, the direct computational abilities of NumPy are more advantageous, providing quick and accurate results without the need for the advanced setup that TensorFlow necessitates.  
+
+For the MSD calculation examined here, TensorFlow is **not considered justifiable**. NumPy is more than sufficient for the task, offering faster execution and negligible differences in the accuracy of results. The advanced capabilities of TensorFlow, such as GPU acceleration and handling of massive datasets, do not come into play for this particular application. By strategically choosing between NumPy and TensorFlow based on the nature of the computational task, developers can ensure efficient resource utilization and optimal performance.
