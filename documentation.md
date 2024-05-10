@@ -206,7 +206,36 @@ The dT40 and [RGRGG]5 were mixed to form condensates in a buffer solution design
   - **25 mM NaCl**: Provides ionic strength to stabilize charges on biomolecules.
   - **20 mM DTT**: Prevents the formation of disulfide bonds between cysteine residues.
 
-The condensate sample was sandwiched between a tween 20-coated coverslip and a slide with mineral oil to prevent evaporation and maintain sample integrity. High-resolution imaging was performed using an epifluorescence microscope with a 100x oil-immersion objective lens.
+The condensate sample was sandwiched between a tween 20-coated coverslip and a slide with mineral oil to prevent evaporation and maintain sample integrity. High-resolution imaging was performed using an epifluorescence microscope with a 100x oil-immersion objective lens.  
+
+### Equations Used for Analysis
+
+**Mean Squared Displacement (MSD) Equation**:  
+
+$MSD(\tau) = 4D\tau^\alpha$  
+
+  Where:
+  - $D$ is the diffusion coefficient, which measures how fast particles spread out over time.
+  - $\tau$ is the lag time over which the displacement of the particles is measured.
+  - $\alpha$ is the diffusive exponent—classically 1 for Brownian motion in viscous fluids, indicating a linear relationship between MSD and time, characteristic of normal diffusion. Values different from 1 suggest anomalous diffusion: $\alpha < 1$ indicates subdiffusive (slow diffusion), and $\alpha > 1$ indicates superdiffusive (fast diffusion).  
+
+  This equation is fundamental for analyzing the random motion of particles within the condensates. It quantifies how much a particle's position changes over time, providing insights into the dynamics within the medium. The diffusion coefficient \( D \) measures the rate of particle dispersion, while \( \alpha \) indicates the nature of the diffusion (normal, subdiffusive, superdiffusive).
+
+**Stokes-Einstein Equation**:
+  
+  $\eta = \frac{k_BT}{6\pi rD}$
+  
+  Where:
+  - $\eta$ is viscosity, representing the fluid's resistance to gradual deformation by shear stress or tensile stress.
+  - $k_B$ is the Boltzmann constant, which links temperature to energy.
+  - $T$ is the absolute temperature of the fluid.
+  - $r$ is the radius of the bead, serving as a scale of the particle size in the fluid.
+  - $D$ is the diffusion coefficient from the MSD equation, providing a measure of how quickly particles are moving through the fluid.  
+
+  This equation is used to calculate the viscosity of the fluid based on the diffusion coefficient derived from the MSD data. Viscosity is a key parameter in understanding how biomolecular condensates influence cellular processes. It measures the fluid's internal resistance to flow and can indicate how substances move through the condensate, affecting reaction rates and molecular interactions.
+
+These equations are integral to the analysis as they allow for the quantification of physical properties that are critical to understanding the behavior of biomolecular condensates under various conditions. By measuring how particles move in response to their environment, researchers can infer the mechanical and dynamic properties of the condensates.
+
 
 #### Data Analysis
 
