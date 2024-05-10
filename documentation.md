@@ -190,3 +190,53 @@ The provided MSD plot presents the time-dependent trajectory of the MSD values c
 The side-by-side MSD trajectory analysis emphasizes the critical aspect of tool selection in computational tasks. It underscores that the choice of computational framework should align with the complexity and nature of the task at hand. For calculations similar to MSD that are not inherently parallelizable or data-intensive, the direct computational abilities of NumPy are more advantageous, providing quick and accurate results without the need for the advanced setup that TensorFlow necessitates.  
 
 For the MSD calculation examined here, TensorFlow is **not considered justifiable**. NumPy is more than sufficient for the task, offering faster execution and negligible differences in the accuracy of results. The advanced capabilities of TensorFlow, such as GPU acceleration and handling of massive datasets, do not come into play for this particular application. By strategically choosing between NumPy and TensorFlow based on the nature of the computational task, developers can ensure efficient resource utilization and optimal performance.
+
+## Viscosity Estimation for dT40 and [RGRGG]5 Condensates
+
+### dT40-[RGRGG]5 Condensate Results
+
+#### Experimental Setup and Results
+
+The dT40 and [RGRGG]5 were mixed to form condensates in a buffer solution designed to mimic cellular conditions. Fluorescently labeled polystyrene beads (200 nm) were incorporated into the mixture to track and measure movement within the condensates, utilizing Video Particle Tracking (VPT).
+
+#### Materials and Methods
+
+- **Buffer Components**: 
+  - **25 mM Tris-HCl**: Stabilizes pH.
+  - **25 mM NaCl**: Provides ionic strength to stabilize charges on biomolecules.
+  - **20 mM DTT**: Prevents the formation of disulfide bonds between cysteine residues.
+
+The condensate sample was sandwiched between a tween 20-coated coverslip and a slide with mineral oil to prevent evaporation and maintain sample integrity. High-resolution imaging was performed using an epifluorescence microscope with a 100x oil-immersion objective lens.
+
+#### Data Analysis
+
+Using the TrackMate plugin and custom Python scripts, the trajectories of beads within the condensates were tracked. The Mean Squared Displacement (MSD) for each bead was calculated, reflecting their motion in the condensates.
+
+The ensemble-averaged MSD was derived from individual trajectories, representing overall particle dynamics.
+![Tracksindividual_track](https://github.com/ubsuny/LLPS-ProteinRNA_Condensates-CP2P2024/assets/143649367/822baced-b31d-4a30-85fa-74e18a9f9a37)    
+*Figure: Random Walk Trajectory of a particle within the condensate.*  
+
+---------------------------------------------------------------------------------------------------------------------------------------------------  
+
+![Screenshot from 2024-05-10 12-21-38](https://github.com/ubsuny/LLPS-ProteinRNA_Condensates-CP2P2024/assets/143649367/4e9969be-76f1-4072-9b6f-8b5fc50df282)
+*Figure: MSD for multiple particles over time, showing a linear trend indicative of diffusive behavior.*    
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+![TracksMSDfit](https://github.com/ubsuny/LLPS-ProteinRNA_Condensates-CP2P2024/assets/143649367/7fef920a-7d7e-44d9-853b-cff887ee8f02)  
+*Figure: Fitting of the MSD curve, used to calculate the diffusion coefficient and viscosity.*  
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+#### Results
+
+- **Diffusion Coefficient**: $\ D = 1.9342 \times 10^{-4} \, \text{µm}^2/\text{s} \$
+- **Viscosity**: $\ \eta = 2.22 \, \text{Pa}\cdot\text{s} \$, indicating a relatively viscous medium compared to water $\ \eta_{\text{water}} = 0.001 \, \text{Pa}\cdot\text{s} \$.
+- **Alpha Value**: $\ \alpha = 1.4237 \$, suggesting that the particle motion deviates from classical Brownian motion and reflects a super-diffusive process.
+
+#### Conclusion
+
+The experimental results successfully quantified the diffusive properties of particles within the dT40-[RGRGG]5 condensates. The viscosity derived from the MSD fitting provides crucial insights into the mechanical resistance of the fluid, with potential implications for material design and drug delivery systems.  
+
+The project on viscosity estimation of DNA-protein condensates using Video Particle Tracking (VPT) introduces novel approaches in biophysics research. It leverages high-resolution epifluorescence microscopy and VPT to precisely track particle dynamics within condensates, offering advanced insights into the rheological properties of biomolecular condensates. This innovative use of VPT in a simulated cellular environment not only enhances the understanding of condensate behavior under various conditions but also provides a detailed characterization of their mechanical properties, thus contributing valuable new insights into cellular organization and dynamics.
+
+
+
